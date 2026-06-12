@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DeadClick</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="hdr">
+      <span class="mark" aria-hidden="true">⊘</span>
+      <span class="word">Dead<span class="accent">Click</span></span>
+      <span id="state-dot" class="dot" title="active"></span>
+    </header>
+
+    <section class="count">
+      <div id="count" class="count-num">0</div>
+      <div class="count-label">traps blocked here</div>
+    </section>
+
+    <section class="rows">
+      <label class="row">
+        <span class="row-label">
+          <strong>Protection</strong>
+          <small id="enabled-sub">On for every site</small>
+        </span>
+        <span class="switch"><input type="checkbox" id="enabled" /><span class="track"></span></span>
+      </label>
+
+      <label class="row">
+        <span class="row-label">
+          <strong>Trust this site</strong>
+          <small id="host-sub">—</small>
+        </span>
+        <span class="switch"><input type="checkbox" id="allow" /><span class="track"></span></span>
+      </label>
+    </section>
+
+    <footer class="foot">
+      <span id="foot-note">Local only · nothing leaves your browser</span>
+      <span id="version" class="ver"></span>
+    </footer>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>overlay trap</title>
+  </head>
+  <body style="margin: 0; font-family: system-ui">
+    <button
+      id="real"
+      style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 24px 36px; font-size: 18px"
+    >
+      REAL BUTTON
+    </button>
+    <!-- Invisible full-viewport sheet that hijacks the first click into an ad popunder. -->
+    <div id="trap" style="position: fixed; inset: 0; z-index: 2147483647; opacity: 0; background: #000"></div>
+    <script>
+      document.getElementById('real').addEventListener('click', () => {
+        document.title = 'real-clicked';
+      });
+      document.getElementById('trap').addEventListener('click', () => {
+        window.open('https://ads.popcash.net/serve?id=1', '_blank');
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>window.open ad trap</title>
+  </head>
+  <body style="margin: 0; font-family: system-ui; padding: 40px">
+    <button id="b" style="padding: 16px 28px; font-size: 18px">Click me</button>
+    <p>A real (trusted) click here tries to open an ad-network popup. Layer 1 should block it by domain.</p>
+    <script>
+      document.getElementById('b').addEventListener('click', () => {
+        window.open('https://ads.popcash.net/serve', '_blank');
+      });
+    </script>
+  </body>
+</html>

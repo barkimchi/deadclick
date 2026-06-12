@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>page-wrap link trap</title>
+  </head>
+  <body style="margin: 0; font-family: system-ui">
+    <!-- Whole page wrapped in a new-tab link to an ad network. Layer 3 should defuse it. -->
+    <a id="wrap" href="https://ads.popcash.net/" target="_blank" style="display: block; position: fixed; inset: 0">
+      <div style="padding: 48px">
+        <h1>Watch now</h1>
+        <p>The entire page is a giant link to an ad. DeadClick should strip its href/target.</p>
+      </div>
+    </a>
+  </body>
+</html>

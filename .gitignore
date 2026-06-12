@@ -1,0 +1,13 @@
+node_modules/
+.wxt/
+.output/
+stats.html
+*.log
+.DS_Store
+
+# Playwright
+/playwright-report/
+/test-results/
+
+# Generated Safari/iOS Xcode wrapper (regenerated from dist/safari)
+/safari-xcode/

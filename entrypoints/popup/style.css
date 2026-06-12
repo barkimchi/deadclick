@@ -1,0 +1,80 @@
+:root {
+  --bg: #0e0d0c;
+  --panel: #161412;
+  --line: #2a2724;
+  --ink: #f3efe9;
+  --muted: #8c857c;
+  --accent: #e5482f;
+  --ok: #3fb950;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; }
+
+body {
+  width: 290px;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.hdr {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid var(--line);
+}
+.mark { color: var(--accent); font-size: 18px; line-height: 1; font-weight: 700; }
+.word { font-weight: 700; letter-spacing: -0.02em; font-size: 15px; }
+.accent { color: var(--accent); }
+.dot {
+  margin-left: auto;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--ok); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 22%, transparent);
+}
+.dot.off { background: var(--muted); box-shadow: none; }
+
+.count { text-align: center; padding: 22px 16px 18px; }
+.count-num {
+  font-size: 52px; font-weight: 800; line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.count-num.has { color: var(--accent); }
+.count-label { margin-top: 6px; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+.rows { padding: 4px 8px 8px; }
+.row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 11px 8px; border-radius: 10px; cursor: pointer;
+}
+.row:hover { background: var(--panel); }
+.row-label { display: flex; flex-direction: column; gap: 2px; }
+.row-label strong { font-size: 13px; font-weight: 600; }
+.row-label small { font-size: 11px; color: var(--muted); }
+
+/* toggle switch */
+.switch { position: relative; display: inline-flex; flex: none; }
+.switch input { position: absolute; opacity: 0; width: 0; height: 0; }
+.track {
+  width: 38px; height: 22px; border-radius: 11px;
+  background: var(--line); transition: background 0.16s ease; position: relative;
+}
+.track::after {
+  content: ""; position: absolute; top: 2px; left: 2px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--ink); transition: transform 0.16s ease;
+}
+.switch input:checked + .track { background: var(--accent); }
+.switch input:checked + .track::after { transform: translateX(16px); }
+.switch input:focus-visible + .track { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.foot {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 11px 16px; border-top: 1px solid var(--line);
+  color: var(--muted); font-size: 10.5px;
+}
+.ver { font-variant-numeric: tabular-nums; }

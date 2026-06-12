@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>legit modal control</title>
+  </head>
+  <body style="margin: 0; font-family: system-ui">
+    <!-- CONTROL: a real dimmed modal + a real user-triggered OAuth popup. DeadClick must
+         NOT remove the backdrop/modal and must NOT block the user-initiated popup. -->
+    <div
+      id="backdrop"
+      style="position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); z-index: 999; display: flex; align-items: center; justify-content: center"
+    >
+      <div id="modal" style="background: #fff; padding: 32px; border-radius: 12px; max-width: 360px">
+        <h2>Sign in</h2>
+        <p>
+          This is a genuine modal dialog with real descriptive content. It should never be
+          mistaken for an invisible click trap, and the button below should open normally.
+        </p>
+        <button id="oauth" style="padding: 12px 20px; font-size: 16px">Continue with Google</button>
+      </div>
+    </div>
+    <script>
+      document.getElementById('oauth').addEventListener('click', () => {
+        const w = window.open('https://example.com/oauth', 'oauth', 'width=500,height=600');
+        if (w) document.title = 'popup-opened';
+      });
+    </script>
+  </body>
+</html>
