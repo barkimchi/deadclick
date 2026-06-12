@@ -84,6 +84,17 @@ The ad-domain list lives in [`src/core/domains.ts`](./src/core/domains.ts) — t
 
 ---
 
+## When a site slips through
+
+Click-traps rotate techniques and domains. To see exactly how a site spawns its tab:
+
+```bash
+npm run build:chrome
+node scripts/diagnose.mjs https://that-site.example
+```
+
+It loads the site with and without the extension, captures every `window.open` (and which frame fired it), native new-tab popups, meta-refresh, and redirects, then classifies the vector. Most fixes are just adding the offending domain to `AD_DOMAINS` in `src/core/domains.ts` (which feeds both the gatekeeper and the network block). Re-run a few times — these sites frequency-cap their popunders.
+
 ## Known limits (honest)
 
 - **Click-traps are an arms race.** Heuristics need occasional tuning as sites adapt.
