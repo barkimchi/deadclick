@@ -16,7 +16,7 @@ DeadClick stacks four defenses. They share one small, unit-tested heuristics cor
 
 | # | Layer | What it does | Where it runs |
 |---|-------|--------------|---------------|
-| 1 | **`window.open` gatekeeper** | Intercepts the browser's "open a new tab" call and refuses it unless *you* genuinely triggered it (a trusted gesture in the last second), it isn't an ad domain, and it isn't flooding popups. | MAIN world, `document_start` — **Chrome + Firefox** |
+| 1 | **`window.open` gatekeeper** | Intercepts the browser's "open a new tab" call and refuses it unless *you* genuinely triggered it (a trusted gesture in the last second), it isn't an ad domain, it isn't flooding popups, **and it isn't fired from a third-party ad iframe**. | MAIN world, `document_start` — **Chrome + Firefox** |
 | 2 | **Overlay remover** | Finds the invisible, full-viewport, empty, top-most sheet that hijacks clicks and removes it, so your click lands on the real button underneath. | Isolated content script — **all browsers incl. iOS** |
 | 3 | **Redirect cleanup** | Defuses whole-page `target="_blank"` link wraps and hardens new-tab links with `rel="noopener"`. | Isolated content script — all browsers |
 | 4 | **Network ad-block (DNR)** | Blocks requests *and navigations* to known ad/popunder domains at the network layer — this is what stops a meta-refresh or JS redirect from ever reaching the ad. | `declarativeNetRequest` — Chrome + Firefox |

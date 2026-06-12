@@ -15,6 +15,8 @@ export interface GateContext {
   allowlisted: boolean;
   /** how many popups have already been opened during the current gesture */
   popupsThisGesture: number;
+  /** is this call coming from a cross-origin (third-party / ad) iframe? */
+  crossOriginFrame?: boolean;
   /** ad-domain list override (tests) */
   adDomains?: readonly string[];
 }
@@ -29,6 +31,10 @@ export const GESTURE_WINDOW_MS = 1000;
 
 export function decideOpen(ctx: GateContext): OpenDecision {
   if (ctx.allowlisted) return { allow: true, reason: 'allowlisted' };
+  // Popunders overwhelmingly fire from third-party ad iframes; legitimate popups
+  // (OAuth, share dialogs) come from the top frame. Blocking cross-origin-frame opens
+  // is high-yield and low-false-positive.
+  if (ctx.crossOriginFrame) return { allow: false, reason: 'third-party-frame' };
   if (ctx.msSinceUserGesture > GESTURE_WINDOW_MS) {
     return { allow: false, reason: 'no-user-gesture' };
   }

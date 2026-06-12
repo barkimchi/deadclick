@@ -21,6 +21,15 @@ export default defineContentScript({
     let lastGesture = Number.NEGATIVE_INFINITY;
     let popupsThisGesture = 0;
 
+    // Are we inside a cross-origin (third-party / ad) iframe? Evaluated once.
+    const crossOriginFrame = (() => {
+      try {
+        return window.top !== window.self && window.top!.location.origin !== window.location.origin;
+      } catch {
+        return true; // accessing top.location threw => definitely cross-origin
+      }
+    })();
+
     // Only TRUSTED events count as a user gesture — synthetic .click() / dispatchEvent
     // do not, which is exactly how we starve popunders that fake interaction.
     const markGesture = (e: Event) => {
@@ -68,6 +77,7 @@ export default defineContentScript({
         url: u,
         allowlisted,
         popupsThisGesture,
+        crossOriginFrame,
       });
       if (decision.allow) {
         popupsThisGesture++;

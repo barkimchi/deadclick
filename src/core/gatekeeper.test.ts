@@ -44,4 +44,14 @@ describe('decideOpen', () => {
   it('allows an about:blank popup within a gesture (legit window.open + write)', () => {
     expect(decideOpen(ctx({ url: 'about:blank' })).allow).toBe(true);
   });
+
+  it('blocks a popup opened from a cross-origin (ad) iframe, even on a fresh click', () => {
+    const d = decideOpen(ctx({ crossOriginFrame: true }));
+    expect(d.allow).toBe(false);
+    expect(d.reason).toBe('third-party-frame');
+  });
+
+  it('still honors the allowlist over the cross-origin-frame rule', () => {
+    expect(decideOpen(ctx({ crossOriginFrame: true, allowlisted: true })).allow).toBe(true);
+  });
 });
